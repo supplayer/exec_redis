@@ -4,8 +4,8 @@ from redis import ConnectionPool, StrictRedis
 class ClientsConnection(StrictRedis):
     def __init__(self, **kwargs):
         super(ClientsConnection, self).__init__(**{**dict(
-            connection_pool=ConnectionPool(host=kwargs.pop('host', 'localhost'), db=kwargs.pop('db', 0)),
-            decode_responses=True), **kwargs}
+            connection_pool=ConnectionPool(host=kwargs.pop('host', 'localhost'), db=kwargs.pop('db', 0), **kwargs),
+            decode_responses=True)}
         )
 
 
