@@ -1,6 +1,6 @@
-from execredis.handler import HandlerRedis
+from execredis.handler import ExecRedisClients
 
 
 __all__ = [
-    'HandlerRedis',
+    'ExecRedisClients',
 ]
