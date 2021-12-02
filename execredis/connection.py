@@ -3,18 +3,9 @@ from redis import ConnectionPool, StrictRedis
 from rediscluster import ClusterConnectionPool, RedisCluster
 
 
-class ClientsConnection(StrictRedis):
-    def __init__(self, **kwargs):
-        super(ClientsConnection, self).__init__(**{**dict(
-            connection_pool=ConnectionPool(host=kwargs.pop('host', 'localhost'), db=kwargs.pop('db', 0), **kwargs),
-            decode_responses=True)}
-        )
-
-
-class ClusterClientsConnection(RedisCluster, ABC):
-    def __init__(self, **kwargs):
-        super(ClusterClientsConnection, self).__init__(**{**dict(
-            connection_pool=ClusterConnectionPool(
-                host=kwargs.pop('host', 'localhost'), db=kwargs.pop('db', 0), **kwargs),
-            decode_responses=True)}
-        )
+class ExecRedisClient(RedisCluster, StrictRedis, ABC):
+    def __new__(cls, host=None, db=0, cluster=False, redis_kwargs=None, **kwargs):
+        __conn = RedisCluster if cluster else StrictRedis
+        __conn_pool = ClusterConnectionPool if cluster else ConnectionPool
+        return __conn(connection_pool=__conn_pool(host=host or 'localhost', db=db, **kwargs),
+                      decode_responses=True, **(redis_kwargs or {}))
