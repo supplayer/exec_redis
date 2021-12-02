@@ -1,6 +1,6 @@
-from execredis.handler import ExecRedisClients
+from execredis.connection import ExecRedisClient
 
 
 __all__ = [
-    'ExecRedisClients',
+    'ExecRedisClient',
 ]
