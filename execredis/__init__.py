@@ -1,9 +1,8 @@
 from execredis.connection import ExecRedisClient
-from execredis.handler import ExecMappingData, ExecMappingAction
+from execredis.handler import ExecMappingData
 
 
 __all__ = [
     'ExecRedisClient',
     'ExecMappingData',
-    'ExecMappingAction',
 ]
