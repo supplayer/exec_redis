@@ -6,8 +6,9 @@ class ExecMappingData:
         self.proj_name = proj_name
         self.redis_app = redis_app
 
-    def hget(self, name, default_value):
-        return loads(self.redis_app.hget(f"{self.proj_name}." + 'MappingData', key=name) or b'null') or default_value
+    def hget(self, name: str, default_value):
+        return loads(self.redis_app.hget(
+            f"{self.proj_name}." + 'MappingData', key=name.lower()) or b'null') or default_value
 
 
 class ExecMappingAction:
