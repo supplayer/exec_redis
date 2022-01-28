@@ -9,6 +9,8 @@ class RedisHandler:
         return self.redis.keys()
 
 
+redis_client = RedisHandler(**{'host': '0.0.0.0', 'db': 0})
+
+
 if __name__ == '__main__':
-    redis_client = RedisHandler(**{'host': '0.0.0.0', 'db': 0})
     print(redis_client.get_keys())
