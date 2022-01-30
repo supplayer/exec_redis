@@ -1,6 +1,5 @@
 from execredis import ExecMappingData
 from tests.test_connection import redis_client
-import inspect
 
 
 m = ExecMappingData(proj_name='test', redis_app=redis_client.redis)
