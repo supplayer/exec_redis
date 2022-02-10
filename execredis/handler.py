@@ -30,9 +30,9 @@ class ExecMappingData:
                     self.__setup_mapping_data(mapping_data, k, v)
 
     def __setup_mapping_data(self, mapping_data, name: str, value):
-        self.__hset_mapping_data(name.lower(), dumps(value))
+        hset_res = self.__hset_mapping_data(name.lower(), dumps(value))
         hset_num = 0 if value == mapping_data[name] else 1
-        log = f"Setup {self.__proj_name}.{self.__name_postfix}.{name}: {hset_num}"
+        log = f"Setup {self.__proj_name}.{self.__name_postfix}.{name}: {hset_res or hset_num}"
         self.__logger(log)
 
     def __hset_mapping_data(self, key=None, value=None):
